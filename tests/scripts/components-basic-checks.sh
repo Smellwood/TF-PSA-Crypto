@@ -187,3 +187,27 @@ component_tf_psa_crypto_check_headers_guards() {
     msg "Check C header files guards"
     scripts/c_header_guards.py
 }
+
+component_tf_psa_crypto_check_macro_parens () {
+    msg "Check: macro hygiene (clang-tidy bugprone-macro-parentheses)" # ~ 5s
+    # clang-tidy only sees macros in active #if branches, so check more than
+    # one configuration. See .clang-tidy for the policy and how to make
+    # exceptions (NOLINT, NOLINTNEXTLINE, NOLINTBEGIN/NOLINTEND).
+    for config in default full; do
+        if [ "$config" = "full" ]; then
+            scripts/config.py full
+        fi
+        rm -rf build-clang-tidy
+        cmake -B build-clang-tidy -DCMAKE_EXPORT_COMPILE_COMMANDS=ON .
+        cmake --build build-clang-tidy --target libtfpsacrypto_generated_files_target
+        run-clang-tidy-18 -clang-tidy-binary clang-tidy-18 -quiet -p build-clang-tidy \
+            -extra-arg=-Wno-unknown-warning-option \
+            -header-filter="^$PWD/(include|core|dispatch|drivers/builtin|extras|platform|utilities)/" \
+            "^$PWD/(core|drivers/builtin/src|extras|platform|utilities)/"
+    done
+    rm -rf build-clang-tidy
+}
+
+support_tf_psa_crypto_check_macro_parens () {
+    type clang-tidy-18 >/dev/null 2>&1 && type run-clang-tidy-18 >/dev/null 2>&1
+}

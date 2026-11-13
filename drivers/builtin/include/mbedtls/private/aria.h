@@ -39,8 +39,10 @@
 /** Bad input data. */
 #define MBEDTLS_ERR_ARIA_BAD_INPUT_DATA PSA_ERROR_INVALID_ARGUMENT
 
+/* NOLINTBEGIN(bugprone-macro-parentheses): negative integer constants are unambiguous */
 /** Invalid data input length. */
 #define MBEDTLS_ERR_ARIA_INVALID_INPUT_LENGTH -0x005E
+/* NOLINTEND(bugprone-macro-parentheses) */
 
 #ifdef __cplusplus
 extern "C" {

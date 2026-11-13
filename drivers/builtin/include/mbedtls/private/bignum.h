@@ -21,6 +21,7 @@
 #include <stdio.h>
 #endif
 
+/* NOLINTBEGIN(bugprone-macro-parentheses): negative integer constants are unambiguous */
 /** An error occurred while reading from or writing to a file. */
 #define MBEDTLS_ERR_MPI_FILE_IO_ERROR                     -0x0002
 /** Bad input parameters to function. */
@@ -35,6 +36,7 @@
 #define MBEDTLS_ERR_MPI_DIVISION_BY_ZERO                  -0x000C
 /** The input arguments are not acceptable. */
 #define MBEDTLS_ERR_MPI_NOT_ACCEPTABLE                    -0x000E
+/* NOLINTEND(bugprone-macro-parentheses) */
 /** Memory allocation failed. */
 #define MBEDTLS_ERR_MPI_ALLOC_FAILED                      PSA_ERROR_INSUFFICIENT_MEMORY
 

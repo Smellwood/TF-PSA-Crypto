@@ -204,7 +204,7 @@ int psa_can_do_hash(psa_algorithm_t hash_alg)
  */
 #define LOCAL_INPUT_DECLARE(input, input_copy_name) \
     psa_crypto_local_input_t LOCAL_INPUT_COPY_OF_##input = PSA_CRYPTO_LOCAL_INPUT_INIT; \
-    const uint8_t *input_copy_name = NULL;
+    const uint8_t *input_copy_name = NULL; /* NOLINT(bugprone-macro-parentheses) */
 
 /* Allocate a copy of the buffer input and set the pointer input_copy to
  * point to the start of the copy.
@@ -221,7 +221,7 @@ int psa_can_do_hash(psa_algorithm_t hash_alg)
     if (status != PSA_SUCCESS) { \
         goto exit; \
     } \
-    input_copy = LOCAL_INPUT_COPY_OF_##input.buffer;
+    (input_copy) = LOCAL_INPUT_COPY_OF_##input.buffer;
 
 /* Free the local input copy allocated previously by LOCAL_INPUT_ALLOC()
  *
@@ -246,7 +246,7 @@ int psa_can_do_hash(psa_algorithm_t hash_alg)
  */
 #define LOCAL_OUTPUT_DECLARE(output, output_copy_name) \
     psa_crypto_local_output_t LOCAL_OUTPUT_COPY_OF_##output = PSA_CRYPTO_LOCAL_OUTPUT_INIT; \
-    uint8_t *output_copy_name = NULL;
+    uint8_t *output_copy_name = NULL; /* NOLINT(bugprone-macro-parentheses) */
 
 /* Allocate a copy of the buffer output and set the pointer output_copy to
  * point to the start of the copy.
@@ -263,7 +263,7 @@ int psa_can_do_hash(psa_algorithm_t hash_alg)
     if (status != PSA_SUCCESS) { \
         goto exit; \
     } \
-    output_copy = LOCAL_OUTPUT_COPY_OF_##output.buffer;
+    (output_copy) = LOCAL_OUTPUT_COPY_OF_##output.buffer;
 
 /* Free the local output copy allocated previously by LOCAL_OUTPUT_ALLOC()
  * after first copying back its contents to the original buffer.

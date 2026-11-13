@@ -20,6 +20,7 @@
 #include "tf-psa-crypto/build_info.h"
 #include "mbedtls/platform_util.h"
 
+/* NOLINTBEGIN(bugprone-macro-parentheses): negative integer constants are unambiguous */
 /** The selected feature is not available. */
 #define MBEDTLS_ERR_MD_FEATURE_UNAVAILABLE                -0x5080
 /** Bad input parameters to function. */
@@ -30,6 +31,7 @@
 #if defined(MBEDTLS_DECLARE_PRIVATE_IDENTIFIERS)
 /** Opening or reading of file failed. */
 #define MBEDTLS_ERR_MD_FILE_IO_ERROR                      -0x5200
+/* NOLINTEND(bugprone-macro-parentheses) */
 #endif
 
 #ifdef __cplusplus

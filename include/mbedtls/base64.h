@@ -15,8 +15,10 @@
 
 #include <stddef.h>
 
+/* NOLINTBEGIN(bugprone-macro-parentheses): negative integer constants are unambiguous */
 /** Invalid character in input. */
 #define MBEDTLS_ERR_BASE64_INVALID_CHARACTER              -0x002C
+/* NOLINTEND(bugprone-macro-parentheses) */
 
 #ifdef __cplusplus
 extern "C" {

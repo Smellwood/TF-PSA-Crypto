@@ -26,8 +26,10 @@
 /** Bad input data. */
 #define MBEDTLS_ERR_CAMELLIA_BAD_INPUT_DATA PSA_ERROR_INVALID_ARGUMENT
 
+/* NOLINTBEGIN(bugprone-macro-parentheses): negative integer constants are unambiguous */
 /** Invalid data input length. */
 #define MBEDTLS_ERR_CAMELLIA_INVALID_INPUT_LENGTH -0x0026
+/* NOLINTEND(bugprone-macro-parentheses) */
 
 #ifdef __cplusplus
 extern "C" {

@@ -42,10 +42,12 @@
 #endif /* MBEDTLS_DECLARE_PRIVATE_IDENTIFIERS */
 
 /* Error codes in range 0x0020-0x0022 */
+/* NOLINTBEGIN(bugprone-macro-parentheses): negative integer constants are unambiguous */
 /** Invalid key length. */
 #define MBEDTLS_ERR_AES_INVALID_KEY_LENGTH                -0x0020
 /** Invalid data input length. */
 #define MBEDTLS_ERR_AES_INVALID_INPUT_LENGTH              -0x0022
+/* NOLINTEND(bugprone-macro-parentheses) */
 
 /** Invalid input data. */
 #define MBEDTLS_ERR_AES_BAD_INPUT_DATA                    PSA_ERROR_INVALID_ARGUMENT

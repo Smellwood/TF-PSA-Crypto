@@ -34,6 +34,7 @@
  * ASN1 is a standard to specify data structures.
  * \{
  */
+/* NOLINTBEGIN(bugprone-macro-parentheses): negative integer constants are unambiguous */
 /** Out of data when parsing an ASN1 data structure. */
 #define MBEDTLS_ERR_ASN1_OUT_OF_DATA                      -0x0060
 /** ASN1 tag was of an unexpected value. */
@@ -44,6 +45,7 @@
 #define MBEDTLS_ERR_ASN1_LENGTH_MISMATCH                  -0x0066
 /** Data is invalid. */
 #define MBEDTLS_ERR_ASN1_INVALID_DATA                     -0x0068
+/* NOLINTEND(bugprone-macro-parentheses) */
 
 /** \} name ASN1 Error codes */
 

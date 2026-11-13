@@ -29,6 +29,7 @@
 
 /** Critical entropy source failure. */
 #define MBEDTLS_ERR_ENTROPY_SOURCE_FAILED PSA_ERROR_INSUFFICIENT_ENTROPY
+/* NOLINTBEGIN(bugprone-macro-parentheses): negative integer constants are unambiguous */
 /** No more sources can be added. */
 #define MBEDTLS_ERR_ENTROPY_MAX_SOURCES                   -0x003E
 /** No sources have been added to poll. */
@@ -37,6 +38,7 @@
 #define MBEDTLS_ERR_ENTROPY_NO_STRONG_SOURCE              -0x003D
 /** Read/write error in file. */
 #define MBEDTLS_ERR_ENTROPY_FILE_IO_ERROR                 -0x003F
+/* NOLINTEND(bugprone-macro-parentheses) */
 
 /**
  * \name SECTION: Module settings

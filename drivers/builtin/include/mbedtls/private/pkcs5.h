@@ -24,12 +24,14 @@
 
 /** Bad input parameters to function. */
 #define MBEDTLS_ERR_PKCS5_BAD_INPUT_DATA                  PSA_ERROR_INVALID_ARGUMENT
+/* NOLINTBEGIN(bugprone-macro-parentheses): negative integer constants are unambiguous */
 /** Unexpected ASN.1 data. */
 #define MBEDTLS_ERR_PKCS5_INVALID_FORMAT                  -0x2f00
 /** Requested KDF or digest alg not available. */
 #define MBEDTLS_ERR_PKCS5_FEATURE_UNAVAILABLE             -0x2e80
 /** Given private key password does not allow for correct decryption. */
 #define MBEDTLS_ERR_PKCS5_PASSWORD_MISMATCH               -0x2e00
+/* NOLINTEND(bugprone-macro-parentheses) */
 
 #ifdef __cplusplus
 extern "C" {

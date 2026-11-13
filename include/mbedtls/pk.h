@@ -19,6 +19,7 @@
 #include "mbedtls/md.h"
 #include "psa/crypto.h"
 
+/* NOLINTBEGIN(bugprone-macro-parentheses): negative integer constants are unambiguous */
 /** Type mismatch, eg attempt to do ECDSA with an RSA key */
 #define MBEDTLS_ERR_PK_TYPE_MISMATCH       -0x3F00
 /** Read/write of file failed. */
@@ -41,6 +42,7 @@
 #define MBEDTLS_ERR_PK_UNKNOWN_NAMED_CURVE -0x3A00
 /** Unavailable feature, e.g. RSA disabled for RSA key. */
 #define MBEDTLS_ERR_PK_FEATURE_UNAVAILABLE -0x3980
+/* NOLINTEND(bugprone-macro-parentheses) */
 
 #ifdef __cplusplus
 extern "C" {

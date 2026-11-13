@@ -43,8 +43,10 @@
 #define MBEDTLS_ERR_ECP_ALLOC_FAILED                      PSA_ERROR_INSUFFICIENT_MEMORY
 /** Generation of random value, such as ephemeral key, failed. */
 #define MBEDTLS_ERR_ECP_RANDOM_FAILED                     PSA_ERROR_INSUFFICIENT_ENTROPY
+/* NOLINTBEGIN(bugprone-macro-parentheses): negative integer constants are unambiguous */
 /** Invalid private or public key. */
 #define MBEDTLS_ERR_ECP_INVALID_KEY                       -0x4C80
+/* NOLINTEND(bugprone-macro-parentheses) */
 /** Operation in progress, call again with the same parameters to continue. */
 #define MBEDTLS_ERR_ECP_IN_PROGRESS                       PSA_OPERATION_INCOMPLETE
 

@@ -22,8 +22,10 @@
 #include "tf-psa-crypto/build_info.h"
 #include "mbedtls/compat-3-crypto.h"
 
+/* NOLINTBEGIN(bugprone-macro-parentheses): negative integer constants are unambiguous */
 #define MBEDTLS_ERR_LMS_OUT_OF_PRIVATE_KEYS -0x0013 /**< Specified LMS key has utilised all of its private keys */
 #define MBEDTLS_ERR_LMS_VERIFY_FAILED    -0x0015 /**< LMS signature verification failed */
+/* NOLINTEND(bugprone-macro-parentheses) */
 
 /* Currently only defined for SHA256, 32 is the max hash output size */
 #define MBEDTLS_LMOTS_N_HASH_LEN_MAX           (32u)

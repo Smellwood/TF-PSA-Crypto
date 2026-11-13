@@ -20,6 +20,7 @@
 extern "C" {
 #endif
 
+/* NOLINTBEGIN(bugprone-macro-parentheses): negative integer constants are unambiguous */
 /** Detected error in mutex or condition variable usage.
  *
  * Note that depending on the platform, many usage errors of
@@ -28,6 +29,7 @@ extern "C" {
  * condition primitives can return this error code.
  */
 #define MBEDTLS_ERR_THREADING_USAGE_ERROR                 -0x001E
+/* NOLINTEND(bugprone-macro-parentheses) */
 
 /** A historical alias for #MBEDTLS_ERR_THREADING_USAGE_ERROR. */
 #define MBEDTLS_ERR_THREADING_MUTEX_ERROR MBEDTLS_ERR_THREADING_USAGE_ERROR

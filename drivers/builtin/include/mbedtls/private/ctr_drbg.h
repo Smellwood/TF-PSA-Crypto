@@ -59,6 +59,7 @@
 #include "mbedtls/threading.h"
 #endif
 
+/* NOLINTBEGIN(bugprone-macro-parentheses): negative integer constants are unambiguous */
 /** The entropy source failed. */
 #define MBEDTLS_ERR_CTR_DRBG_ENTROPY_SOURCE_FAILED        -0x0034
 /** The requested random buffer length is too big. */
@@ -67,6 +68,7 @@
 #define MBEDTLS_ERR_CTR_DRBG_INPUT_TOO_BIG                -0x0038
 /** Read or write error in file. */
 #define MBEDTLS_ERR_CTR_DRBG_FILE_IO_ERROR                -0x003A
+/* NOLINTEND(bugprone-macro-parentheses) */
 
 #define MBEDTLS_CTR_DRBG_BLOCKSIZE          16 /**< The block size used by the cipher. */
 
@@ -129,7 +131,7 @@ extern "C" {
  * the entropy source does not provide enough material to form a nonce.
  * See the documentation of mbedtls_ctr_drbg_seed() for more information.
  */
-#define MBEDTLS_CTR_DRBG_ENTROPY_NONCE_LEN (MBEDTLS_CTR_DRBG_ENTROPY_LEN + 1) / 2
+#define MBEDTLS_CTR_DRBG_ENTROPY_NONCE_LEN ((MBEDTLS_CTR_DRBG_ENTROPY_LEN + 1) / 2)
 #endif
 
 #if defined(MBEDTLS_CTR_DRBG_USE_PSA_CRYPTO)

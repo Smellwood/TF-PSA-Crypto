@@ -22,6 +22,7 @@
  * PEM data.
  * \{
  */
+/* NOLINTBEGIN(bugprone-macro-parentheses): negative integer constants are unambiguous */
 /** No PEM header or footer found. */
 #define MBEDTLS_ERR_PEM_NO_HEADER_FOOTER_PRESENT          -0x1080
 /** PEM string is not as expected. */
@@ -36,6 +37,7 @@
 #define MBEDTLS_ERR_PEM_PASSWORD_MISMATCH                 -0x1380
 /** Unavailable feature, e.g. hashing/encryption combination. */
 #define MBEDTLS_ERR_PEM_FEATURE_UNAVAILABLE               -0x1400
+/* NOLINTEND(bugprone-macro-parentheses) */
 /** \} name PEM Error codes */
 
 #ifdef __cplusplus
