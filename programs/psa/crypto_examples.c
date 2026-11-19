@@ -26,7 +26,7 @@
         {                                                                     \
             printf("\tassertion failed at %s:%d - "                  \
                    "actual:%d expected:%d\r\n", __FILE__, __LINE__,  \
-                   (psa_status_t) actual, (psa_status_t) expected); \
+                   (psa_status_t) (actual), (psa_status_t) (expected)); \
             goto exit;                                                        \
         }                                                                     \
     } while (0)

@@ -20,16 +20,20 @@
 #include "tf-psa-crypto/build_info.h"
 #include "mbedtls/platform_util.h"
 
+/* NOLINTBEGIN(bugprone-macro-parentheses) */
 /** The selected feature is not available. */
 #define MBEDTLS_ERR_MD_FEATURE_UNAVAILABLE                -0x5080
+/* NOLINTEND(bugprone-macro-parentheses) */
 /** Bad input parameters to function. */
 #define MBEDTLS_ERR_MD_BAD_INPUT_DATA                     PSA_ERROR_INVALID_ARGUMENT
 /** Failed to allocate memory. */
 #define MBEDTLS_ERR_MD_ALLOC_FAILED                       PSA_ERROR_INSUFFICIENT_MEMORY
 
 #if defined(MBEDTLS_DECLARE_PRIVATE_IDENTIFIERS)
+/* NOLINTBEGIN(bugprone-macro-parentheses) */
 /** Opening or reading of file failed. */
 #define MBEDTLS_ERR_MD_FILE_IO_ERROR                      -0x5200
+/* NOLINTEND(bugprone-macro-parentheses) */
 #endif
 
 #ifdef __cplusplus
