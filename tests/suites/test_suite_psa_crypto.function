@@ -4295,6 +4295,61 @@ exit:
 }
 /* END_CASE */
 
+/* BEGIN_CASE depends_on:PSA_WANT_ALG_STREAM_CIPHER:PSA_WANT_KEY_TYPE_CHACHA20 */
+void chacha20_counter_limit(data_t *key_data, data_t *iv,
+                            int input_length_arg, int first_part_size_arg,
+                            int expected_status_arg)
+{
+    /* Encrypt input_length bytes in two parts with a caller-chosen IV.
+     * The first part must succeed. The second part, if any, must
+     * return expected_status. */
+    mbedtls_svc_key_id_t key = MBEDTLS_SVC_KEY_ID_INIT;
+    psa_cipher_operation_t operation = psa_cipher_operation_init_short();
+    psa_key_attributes_t attributes = PSA_KEY_ATTRIBUTES_INIT;
+    size_t input_length = input_length_arg;
+    size_t first_part_size = first_part_size_arg;
+    unsigned char *input = NULL;
+    unsigned char *output = NULL;
+    size_t output_length = 0;
+
+    TEST_LE_U(first_part_size, input_length);
+    TEST_CALLOC(input, input_length);
+    TEST_CALLOC(output, input_length);
+
+    PSA_ASSERT(psa_crypto_init());
+
+    psa_set_key_usage_flags(&attributes, PSA_KEY_USAGE_ENCRYPT);
+    psa_set_key_algorithm(&attributes, PSA_ALG_STREAM_CIPHER);
+    psa_set_key_type(&attributes, PSA_KEY_TYPE_CHACHA20);
+    PSA_ASSERT(psa_import_key(&attributes, key_data->x, key_data->len,
+                              &key));
+
+    PSA_ASSERT(psa_cipher_encrypt_setup(&operation, key,
+                                        PSA_ALG_STREAM_CIPHER));
+    PSA_ASSERT(psa_cipher_set_iv(&operation, iv->x, iv->len));
+    PSA_ASSERT(psa_cipher_update(&operation, input, first_part_size,
+                                 output, input_length, &output_length));
+    TEST_EQUAL(output_length, first_part_size);
+
+    if (first_part_size < input_length) {
+        TEST_EQUAL(psa_cipher_update(&operation,
+                                     input + first_part_size,
+                                     input_length - first_part_size,
+                                     output + first_part_size,
+                                     input_length - first_part_size,
+                                     &output_length),
+                   expected_status_arg);
+    }
+
+exit:
+    psa_cipher_abort(&operation);
+    mbedtls_free(input);
+    mbedtls_free(output);
+    psa_destroy_key(key);
+    PSA_DONE();
+}
+/* END_CASE */
+
 /* BEGIN_CASE */
 void cipher_alg_without_iv(int alg_arg, int key_type_arg, data_t *key_data,
                            data_t *plaintext, data_t *ciphertext)
