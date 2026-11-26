@@ -619,3 +619,9 @@ mpi_core_div:"ffffffffffffffff":"8000000000000000":"0000000000000001":"7ffffffff
 DIV: 64-bit div 65-bit
 mpi_core_div:"ffffffffffffffff":"010000000000000000":"0000000000000000":"00ffffffffffffffff"
 
+
+DIV: 128-bit div 64-bit, remainder overflows the top limb when shifted
+mpi_core_div:"80000000000000000000000000000000":"c000000000000000":"0000000000000000aaaaaaaaaaaaaaaa":"8000000000000000"
+
+DIV: 128-bit div 64-bit all-ones, remainder B-1
+mpi_core_div:"fffffffffffffffeffffffffffffffff":"ffffffffffffffff":"0000000000000000ffffffffffffffff":"fffffffffffffffe"
