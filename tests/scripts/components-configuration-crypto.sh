@@ -1472,6 +1472,7 @@ component_tests_pkcs5_with_limited_pbkdf2_iteration_count() {
     msg "test: crypto with MBEDTLS_PK_DECRYPT_MAX_ITERATIONS = 15k"
     ctest -R "pkcs5-suite"
 }
+
 # Build sha3.c with only its hash part: built-in SHA3 hashes, no
 # built-in SHAKE.
 component_test_sha3_hashes_no_shake () {
@@ -1487,11 +1488,12 @@ component_test_sha3_hashes_no_shake () {
     scripts/config.py unset TF_PSA_CRYPTO_PQCP_MLDSA_65_ENABLED
     scripts/config.py unset TF_PSA_CRYPTO_PQCP_MLDSA_44_ENABLED
 
-    cmake -S . -B build-noshake
-    cmake --build build-noshake -j"$(nproc)"
+    cd "$OUT_OF_SOURCE_DIR"
+    cmake "$TF_PSA_CRYPTO_ROOT_DIR"
+    cmake --build .
 
     msg "test: full config, no built-in SHAKE"
-    build-noshake/tests/test_suite_config.crypto_combinations
+    ctest
 }
 
 # Build sha3.c with only its XOF part: built-in SHAKE, no built-in
@@ -1504,9 +1506,10 @@ component_test_shake_no_sha3_hash () {
     scripts/config.py unset PSA_WANT_ALG_SHA3_384
     scripts/config.py unset PSA_WANT_ALG_SHA3_512
 
-    cmake -S . -B build-nohash
-    cmake --build build-nohash -j"$(nproc)"
+    cd "$OUT_OF_SOURCE_DIR"
+    cmake "$TF_PSA_CRYPTO_ROOT_DIR"
+    cmake --build .
 
     msg "test: full config, SHAKE but no built-in SHA3 hash"
-    build-nohash/tests/test_suite_config.crypto_combinations
+    ctest
 }
