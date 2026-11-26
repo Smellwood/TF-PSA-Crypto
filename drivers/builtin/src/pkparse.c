@@ -557,10 +557,10 @@ int mbedtls_pk_parse_subpubkey(unsigned char **p, const unsigned char *end,
         } else {
             ret = MBEDTLS_ERR_PK_INVALID_PUBKEY;
         }
-        /* For RSASSA-PSS, the padding must be set (by default, it is PKCS#1 v1.5) */
-        if (pk_alg == MBEDTLS_PK_RSASSA_PSS) {
-            ret = mbedtls_rsa_set_padding((mbedtls_rsa_context *) pk, MBEDTLS_RSA_PKCS_V21, MBEDTLS_MD_NONE); 
-        }
+        /* Do not call mbedtls_rsa_set_padding() here: mbedtls_pk_context is
+         * not an mbedtls_rsa_context. In this PK layer the public key lives
+         * in pk->pub_raw, and that call would overwrite 8 bytes of the
+         * modulus. The algorithm is already MBEDTLS_PK_RSASSA_PSS. */
     } else
 #endif /* PSA_WANT_KEY_TYPE_RSA_PUBLIC_KEY */
 #if defined(PSA_WANT_KEY_TYPE_ECC_PUBLIC_KEY)

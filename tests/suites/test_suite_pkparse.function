@@ -328,3 +328,31 @@ exit:
     USE_PSA_DONE();
 }
 /* END_CASE */
+
+/* BEGIN_CASE depends_on:PSA_WANT_KEY_TYPE_RSA_PUBLIC_KEY */
+void pk_parse_pss_and_rsa_exports_equal(data_t *pss_spki, data_t *rsa_spki)
+{
+    mbedtls_pk_context pss, rsa;
+    unsigned char pss_out[512], rsa_out[512];
+    int pss_len, rsa_len;
+
+    mbedtls_pk_init(&pss);
+    mbedtls_pk_init(&rsa);
+    PSA_INIT();
+
+    TEST_EQUAL(mbedtls_pk_parse_public_key(&pss, pss_spki->x, pss_spki->len), 0);
+    TEST_EQUAL(mbedtls_pk_parse_public_key(&rsa, rsa_spki->x, rsa_spki->len), 0);
+
+    pss_len = mbedtls_pk_write_pubkey_der(&pss, pss_out, sizeof(pss_out));
+    rsa_len = mbedtls_pk_write_pubkey_der(&rsa, rsa_out, sizeof(rsa_out));
+    TEST_ASSERT(pss_len > 0);
+    TEST_EQUAL(pss_len, rsa_len);
+    TEST_MEMORY_COMPARE(pss_out + sizeof(pss_out) - pss_len, (size_t) pss_len,
+                        rsa_out + sizeof(rsa_out) - rsa_len, (size_t) rsa_len);
+
+exit:
+    mbedtls_pk_free(&pss);
+    mbedtls_pk_free(&rsa);
+    PSA_DONE();
+}
+/* END_CASE */
